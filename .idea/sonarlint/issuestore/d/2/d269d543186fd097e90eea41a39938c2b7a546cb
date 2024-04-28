@@ -1,0 +1,20 @@
+
+‚
+java:S1192$"`Define a constant instead of duplicating this literal "æ”¶åˆ°ä¸»é¢˜ä¸º{}çš„æ¶ˆæ¯ï¼š{}" 3 times.(ş¾ğÛúÿÿÿÿ8±ãâÉñ1
+A
+java:S2629%"$Invoke method(s) only conditionally.(’…ˆà8²ãâÉñ1
+A
+java:S2629&"$Invoke method(s) only conditionally.(’·‡•8²ãâÉñ1
+a
+java:S1134"DTake the required action to fix the issue indicated by this comment.(Ü×¥²8¥‘Êñ1
+X
+java:S2696"6Make the enclosing method "static" or remove this set.(…½×Âıÿÿÿÿ8¹ãâÉñ1
+X
+java:S2696"6Make the enclosing method "static" or remove this set.(ù˜£ƒùÿÿÿÿ8ºãâÉñ1
+L	java:S106$"+Replace this use of System.out by a logger.(ş¾ğÛúÿÿÿÿ8ºãâÉñ1
+G
+java:S2116$"%Use "Arrays.toString(array)" instead.(ş¾ğÛúÿÿÿÿ8»ãâÉñ1
+B
+java:S2116%"%Use "Arrays.toString(array)" instead.(’…ˆà8»ãâÉñ1
+B
+java:S2116&"%Use "Arrays.toString(array)" instead.(’·‡•8¼ãâÉñ1

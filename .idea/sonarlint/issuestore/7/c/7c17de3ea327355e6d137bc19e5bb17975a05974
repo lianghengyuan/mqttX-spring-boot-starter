@@ -1,8 +1,0 @@
-
-f	java:S117g"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(† Â°
-v	java:S116"\Rename this field "KeepAliveInterval" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–¦Æüÿÿÿÿ
-h	java:S116\"NRename this field "QOS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿÏÑŠûÿÿÿÿ
-_
-java:S1134`"DTake the required action to fix the issue indicated by this comment.(ï×÷úÿÿÿÿ
-l
-java:S1128"QRemove this unused import 'org.springframework.context.annotation.ComponentScan'.(æëòÒûÿÿÿÿ

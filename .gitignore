@@ -1,4 +1,4 @@
-HELP.md
+mqttx-spring-boot-starter/HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -28,6 +28,7 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+.idea/
 
 ### VS Code ###
 .vscode/

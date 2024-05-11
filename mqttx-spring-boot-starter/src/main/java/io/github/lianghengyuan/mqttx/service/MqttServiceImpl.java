@@ -36,6 +36,7 @@ class MqttServiceImpl implements MqttService {
         if (msgHandler == null) {
             throw new MsgHandlerIsNull("1002",new Object[]{topic, message}, "没有与msgAction对应的msgHandler");
         }
-        msgHandler.process(jsonMessage);
+        //FIXME 加上TOPIC
+        msgHandler.process(topic,jsonMessage);
     }
 }

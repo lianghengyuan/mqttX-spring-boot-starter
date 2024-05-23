@@ -30,11 +30,15 @@ class MqttServiceImpl implements MqttService {
         JsonNode jsonNode = objectMapper.readTree(message.getPayload());
         String msgAction = jsonNode.get("msgAction").asText();
         if (!StringUtils.hasLength(msgAction)) {
-            throw new MsgActionIsEmpty("1001",new Object[]{topic, message},"消息处理标签解析失败");
+            log.error("消息处理标签解析失败");
+            return;
+//            throw new MsgActionIsEmpty("1001",new Object[]{topic, message},"消息处理标签解析失败");
         }
         MsgHandler msgHandler = msgHandlerContext.getHandler(msgAction);
         if (msgHandler == null) {
-            throw new MsgHandlerIsNull("1002",new Object[]{topic, message}, "没有与msgAction对应的msgHandler");
+            log.error("没有与msgAction:%s,对应的msgHandler",msgAction);
+            return;
+//            throw new MsgHandlerIsNull("1002",new Object[]{topic, message}, "没有与msgAction对应的msgHandler");
         }
         //FIXME 加上TOPIC
         msgHandler.process(topic,jsonMessage);

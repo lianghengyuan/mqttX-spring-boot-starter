@@ -21,7 +21,7 @@ class MsgHandlerContextImp implements ApplicationContextAware, MsgHandlerContext
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         Map<String, MsgHandler> map = applicationContext.getBeansOfType(MsgHandler.class);
         map.values().stream().forEach(msgHandler -> {
-            String msgAction = msgHandler.getClass().getAnnotation(MsgAction.class).value();
+            String msgAction = msgHandler.getClass().getAnnotation(MsgAction.class).value().trim();
             msgHandlerMap.put(msgAction, msgHandler);
         });
     }

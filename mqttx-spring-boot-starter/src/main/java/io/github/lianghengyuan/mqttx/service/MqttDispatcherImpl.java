@@ -13,22 +13,20 @@ import java.io.IOException;
 
 
 @Component
-class MqttServiceImpl implements MqttService {
+class MqttDispatcherImpl implements MqttDispatcher {
 
-
-    @Autowired
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
     private MsgHandlerContext msgHandlerContext;
 
-    private static final Logger log = LoggerFactory.getLogger(MqttServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(MqttDispatcherImpl.class);
 
     @Override
-    public void processMessages(String topic, MqttMessage message) throws IOException {
+    public void dispatcher(String topic, MqttMessage message) throws IOException {
         String jsonMessage = new String(message.getPayload());
         JsonNode jsonNode = objectMapper.readTree(message.getPayload());
-        String msgAction = jsonNode.get("msgAction").asText();
+        String msgAction = jsonNode.get("msgAction").asText().trim();
         if (!StringUtils.hasLength(msgAction)) {
             log.error("消息处理标签解析失败");
             return;

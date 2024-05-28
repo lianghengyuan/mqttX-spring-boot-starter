@@ -12,7 +12,7 @@ class DispatchMqttMessageListener implements IMqttMessageListener {
 
 
     @Autowired
-    private MqttService mqttService;
+    private MqttDispatcher mqttDispatcher;
     /**
      * This method is called when a message arrives from the server.
      *
@@ -44,6 +44,6 @@ class DispatchMqttMessageListener implements IMqttMessageListener {
      */
     @Override
     public void messageArrived(String topic, MqttMessage message) throws IOException {
-        mqttService.processMessages(topic, message);
+        mqttDispatcher.dispatcher(topic, message);
     }
 }

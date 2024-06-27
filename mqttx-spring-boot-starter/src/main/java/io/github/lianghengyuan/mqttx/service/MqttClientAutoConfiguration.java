@@ -68,6 +68,7 @@ class MqttClientAutoConfiguration {
 
     MqttConnectOptions mqttConnectOptions() {
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
+        mqttConnectOptions.setMaxInflight(10000);
         mqttConnectOptions.setUserName(mqttClientProperties.getUsername());
         mqttConnectOptions.setPassword(mqttClientProperties.getPassword().toCharArray());
         mqttConnectOptions.setAutomaticReconnect(true);

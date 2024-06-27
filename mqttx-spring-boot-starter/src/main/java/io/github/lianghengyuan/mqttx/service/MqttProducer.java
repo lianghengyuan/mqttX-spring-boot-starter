@@ -31,7 +31,7 @@ public class MqttProducer {
         try {
             mqttClient.publish(topic, playload.getBytes(StandardCharsets.UTF_8), qos, retained);
         } catch (MqttException e) {
-            log.error("主题%s消息:%s,发送失败",topic,playload);
+            log.error("主题{}消息:{},发送失败，失败原因",topic,playload,e);
 //            throw new RuntimeException(e);
         }
     }

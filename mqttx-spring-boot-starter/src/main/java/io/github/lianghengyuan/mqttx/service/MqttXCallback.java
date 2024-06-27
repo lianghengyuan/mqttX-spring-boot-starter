@@ -18,10 +18,10 @@ class MqttXCallback implements MqttCallbackExtended {
     @Override
     public void connectComplete(boolean reconnect, String serverURI) {
         if (reconnect) {
-            log.debug("%s重新连接%d次 ", serverURI, reconnectNumber);
+            log.debug("{}重新连接{}次 ", serverURI, reconnectNumber);
             reconnectNumber++;
         }else {
-            log.debug("%s连接成功",serverURI);
+            log.debug("{}连接成功",serverURI);
             reconnectNumber = 1;
         }
     }
@@ -41,7 +41,7 @@ class MqttXCallback implements MqttCallbackExtended {
 
     @Override
     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
-        log.debug("消息已经到达?=========== %s",iMqttDeliveryToken.isComplete());
+        log.debug("消息已经到达{}",iMqttDeliveryToken.isComplete());
     }
 
 }

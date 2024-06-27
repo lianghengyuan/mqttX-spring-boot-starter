@@ -13,7 +13,7 @@ class MsgHandlerContextImp implements ApplicationContextAware, MsgHandlerContext
 
 //    private ApplicationContext applicationContext;
 
-    private Map<String, MsgHandler> msgHandlerMap = new HashMap<>();
+    private Map<String, MsgHandler> msgHandlerMap = new HashMap<>(64);
 
 
 

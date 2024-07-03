@@ -10,6 +10,4 @@ import java.lang.annotation.*;
 @Component
 public @interface MsgAction {
     String value();
-
-    String clientId();
 }

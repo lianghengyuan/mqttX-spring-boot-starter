@@ -21,6 +21,24 @@ public class MqttProducer {
     private static Map<String, MqttClient> mqttClientMap = new HashMap<>(64);
 
 
+    public void sendAll(String topic,String payload, int qos, boolean retained) {
+        mqttClientMap.forEach((key,value) -> {
+            try {
+                value.publish(topic, payload.getBytes(StandardCharsets.UTF_8), qos, retained);
+            } catch (MqttException e) {
+                log.error("主题{}消息:{},发送失败，失败原因",topic, payload, e);
+            }
+        });
+    }
+
+    public void sendAll(String topic,String payload, int qos) {
+       sendAll(topic,payload,qos,false);
+    }
+
+    public void sendAll(String topic,String payload) {
+        sendAll(topic,payload,0,false);
+    }
+
     public void send(String clientId, String topic, String payload, int qos, boolean retained) {
         try {
             mqttClientMap.get(clientId).publish(topic, payload.getBytes(StandardCharsets.UTF_8), qos, retained);

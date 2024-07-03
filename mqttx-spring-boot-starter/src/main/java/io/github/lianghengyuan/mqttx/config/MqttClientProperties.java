@@ -10,7 +10,18 @@ import java.util.List;
 @ConfigurationProperties(prefix = "mqtt")
 public class MqttClientProperties {
 
+    private boolean enable = false;
+
     private List<MqttConnectOptionsProperties> mqttConnectOptionsPropertiesList;
+
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
 
     public List<MqttConnectOptionsProperties> getMqttConnectOptionsPropertiesList() {
         return mqttConnectOptionsPropertiesList;

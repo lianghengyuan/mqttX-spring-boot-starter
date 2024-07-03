@@ -44,7 +44,7 @@ class MqttClientAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-//    @ConditionalOnProperty({"mqtt"})
+    @ConditionalOnProperty(name = "mqtt.enable", havingValue = "true")
     public MqttProducer mqttProducer() {
 
         List<MqttClientProperties.MqttConnectOptionsProperties> mqttConnectOptionsPropertiesList

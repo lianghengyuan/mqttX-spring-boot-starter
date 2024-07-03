@@ -70,6 +70,20 @@ public class MqttProducer {
         sendByJson(clientId, topic, msg, 0, false);
     }
 
+    public<T extends Object> void sendAllByJson(String topic, T msg, int qos, boolean retained) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String valueAsString = objectMapper.writeValueAsString(msg);
+        sendAll(topic,valueAsString,qos,retained);
+    }
+
+    public<T extends Object> void sendAllByJson(String topic, T msg, int qos) throws JsonProcessingException {
+        sendAllByJson(topic,msg,qos,false);
+    }
+
+    public<T extends Object> void sendAllByJson(String topic, T msg) throws JsonProcessingException {
+        sendAllByJson(topic,msg,0,false);
+    }
+
     public void subscribe(String clientId, String topic) throws MqttException {
         mqttClientMap.get(clientId).subscribe(topic);
     }

@@ -1,1 +1,1 @@
-io.github.lianghengyuan.mqttx.service.MqttClientAutoConfiguration
+io.github.lianghengyuan.mqttx.config.MqttClientAutoConfiguration

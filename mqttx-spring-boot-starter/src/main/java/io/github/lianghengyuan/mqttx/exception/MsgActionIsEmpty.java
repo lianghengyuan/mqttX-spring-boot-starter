@@ -1,9 +1,12 @@
-package io.github.lianghengyuan.mqttx.service;
+package io.github.lianghengyuan.mqttx.exception;
 
-class MsgActionIsEmpty extends BaseException{
+@Deprecated
+public class MsgActionIsEmpty extends BaseException{
 
 
     MsgActionIsEmpty(String code, Object[] args, String defaultMessage) {
         super(code, args, defaultMessage);
     }
+
+
 }

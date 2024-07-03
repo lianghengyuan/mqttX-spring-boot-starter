@@ -1,6 +1,6 @@
-package io.github.lianghengyuan.mqttx.service;
+package io.github.lianghengyuan.mqttx.exception;
 
-class BaseException extends RuntimeException{
+public class BaseException extends RuntimeException{
 
     private static final long serialVersionUID = 1L;
 

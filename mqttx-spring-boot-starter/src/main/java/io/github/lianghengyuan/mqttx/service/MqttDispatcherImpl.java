@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 
 @Component
@@ -27,21 +25,25 @@ class MqttDispatcherImpl implements MqttDispatcher {
 
     @Override
     public void dispatcher(String topic, MqttMessage message) throws IOException {
+
         String jsonMessage = new String(message.getPayload());
+
+        MsgHandler topicHandler = msgHandlerContext.getTopicHandler(topic);
+        if (topicHandler != null) {
+            topicHandler.process(topic, jsonMessage);
+            log.debug("处理Topic为{}的消息",topic);
+        }
+
         JsonNode jsonNode = objectMapper.readTree(message.getPayload());
         String msgAction = jsonNode.get("msgAction").asText().trim();
-        if (!StringUtils.hasLength(msgAction)) {
-            log.info("没有标签magAction,采用默认的的handler处理");
-            msgAction = "default_msgAction";
-//            throw new MsgActionIsEmpty("1001",new Object[]{topic, message},"消息处理标签解析失败");
+
+        if (!StringUtils.hasLength(msgAction)) return;
+
+        MsgHandler msgHandler = msgHandlerContext.getMsgActionHandler(msgAction);
+        if (msgHandler != null) {
+            msgHandler.process(topic,jsonMessage);
+            log.debug("处理MsgAction为{}的消息",msgAction);
         }
-        MsgHandler msgHandler = msgHandlerContext.getHandler(msgAction);
-        if (msgHandler == null) {
-            log.error("没有与msgAction:{},对应的msgHandler",msgAction);
-            return;
-//            throw new MsgHandlerIsNull("1002",new Object[]{topic, message}, "没有与msgAction对应的msgHandler");
-        }
-        //FIXME 加上TOPIC
-        msgHandler.process(topic,jsonMessage);
+
     }
 }

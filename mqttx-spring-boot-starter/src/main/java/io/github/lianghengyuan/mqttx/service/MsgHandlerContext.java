@@ -2,5 +2,7 @@ package io.github.lianghengyuan.mqttx.service;
 
 interface MsgHandlerContext {
 
-    MsgHandler getHandler(String msgAction);
+    MsgHandler getMsgActionHandler(String msgAction);
+
+    MsgHandler getTopicHandler(String topic);
 }

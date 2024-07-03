@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-class DispatchMqttMessageListener implements IMqttMessageListener {
+public class DispatchMqttMessageListener implements IMqttMessageListener {
 
 
     @Autowired

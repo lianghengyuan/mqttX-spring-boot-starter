@@ -4,6 +4,6 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.io.IOException;
 
-interface MqttDispatcher {
+public interface MqttDispatcher {
    void dispatcher(String topic, MqttMessage message) throws IOException;
 }

@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
  * FiXME 此类并未起作用
  */
 @Component
-class MqttXCallback implements MqttCallbackExtended {
-    private static final Logger log = LoggerFactory.getLogger(MqttXCallback.class);
+public class MqttProducerCallback implements MqttCallbackExtended {
+    private static final Logger log = LoggerFactory.getLogger(MqttProducerCallback.class);
     private static int reconnectNumber = 1;
     @Override
     public void connectComplete(boolean reconnect, String serverURI) {

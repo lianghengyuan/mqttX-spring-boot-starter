@@ -9,16 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class MqttProducer {
 
     private static final Logger log = LoggerFactory.getLogger(MqttProducer.class);
 
     private static Map<String, MqttClient> mqttClientMap = new HashMap<>(64);
+
+    private static List<MqttClient> mqttClientList = new ArrayList<>();
 
 
     public void sendAll(String topic,String payload, int qos, boolean retained) {
@@ -112,12 +111,56 @@ public class MqttProducer {
     public void subscribe(String clientId, String topic, int qos) throws MqttException {
         mqttClientMap.get(clientId).subscribe(topic,qos);
     }
-    public void setMqttClient(MqttClient mqttClient) {
-        mqttClientMap.put(mqttClient.getClientId(),mqttClient);
+
+
+    public void subscribe(int index, String topic) throws MqttException {
+        mqttClientList.get(index).subscribe(topic);
     }
 
+    public void subscribe(int index, String topic, IMqttMessageListener iMqttMessageListener) throws MqttException {
+        mqttClientMap.get(index).subscribe(topic, iMqttMessageListener);
+    }
 
+    public void subscribe(int index,List<String> topicList) throws MqttException {
+        mqttClientMap.get(index).subscribe(topicList.toArray(new String[topicList.size()]));
+    }
+    //TODO 补全所有subscribe方法，包括对于List、map等变量类型的支持。
 
+    public void subscribe(int index, String[] topic) throws MqttException {
+        mqttClientMap.get(index).subscribe(topic);
+    }
+
+    public void subscribe(int index, String[] topic, IMqttMessageListener[] iMqttMessageListener) throws MqttException {
+        mqttClientMap.get(index).subscribe(topic,iMqttMessageListener);
+    }
+
+    public void subscribe(int index, String topic, int qos, IMqttMessageListener iMqttMessageListener) throws MqttException {
+        mqttClientMap.get(index).subscribe(topic, qos, iMqttMessageListener);
+    }
+
+    public void subscribe(int index, String topic, int qos) throws MqttException {
+        mqttClientMap.get(index).subscribe(topic,qos);
+    }
+    public void setMqttClient(MqttClient mqttClient) {
+        mqttClientMap.put(mqttClient.getClientId(),mqttClient);
+        mqttClientList.add(mqttClient);
+    }
+
+    public void unsubscribe(String clientId, String topic) throws MqttException {
+        mqttClientMap.get(clientId).unsubscribe(topic);
+    }
+
+    public void unsubscribe(String clientId, String[] topic) throws MqttException {
+        mqttClientMap.get(clientId).unsubscribe(topic);
+    }
+
+    public void unsubscribe(int index, String topic) throws MqttException {
+        mqttClientList.get(index).unsubscribe(topic);
+    }
+
+    public void unsubscribe(int index, String[] topic) throws MqttException {
+        mqttClientList.get(index).unsubscribe(topic);
+    }
 
     public void disconnect(String clientId) throws MqttException {
         MqttClient mqttClient = mqttClientMap.get(clientId);

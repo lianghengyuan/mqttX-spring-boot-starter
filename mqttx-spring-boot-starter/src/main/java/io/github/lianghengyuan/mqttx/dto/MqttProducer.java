@@ -118,28 +118,28 @@ public class MqttProducer {
     }
 
     public void subscribe(int index, String topic, IMqttMessageListener iMqttMessageListener) throws MqttException {
-        mqttClientMap.get(index).subscribe(topic, iMqttMessageListener);
+        mqttClientList.get(index).subscribe(topic, iMqttMessageListener);
     }
 
     public void subscribe(int index,List<String> topicList) throws MqttException {
-        mqttClientMap.get(index).subscribe(topicList.toArray(new String[topicList.size()]));
+        mqttClientList.get(index).subscribe(topicList.toArray(new String[topicList.size()]));
     }
     //TODO 补全所有subscribe方法，包括对于List、map等变量类型的支持。
 
     public void subscribe(int index, String[] topic) throws MqttException {
-        mqttClientMap.get(index).subscribe(topic);
+        mqttClientList.get(index).subscribe(topic);
     }
 
     public void subscribe(int index, String[] topic, IMqttMessageListener[] iMqttMessageListener) throws MqttException {
-        mqttClientMap.get(index).subscribe(topic,iMqttMessageListener);
+        mqttClientList.get(index).subscribe(topic,iMqttMessageListener);
     }
 
     public void subscribe(int index, String topic, int qos, IMqttMessageListener iMqttMessageListener) throws MqttException {
-        mqttClientMap.get(index).subscribe(topic, qos, iMqttMessageListener);
+        mqttClientList.get(index).subscribe(topic, qos, iMqttMessageListener);
     }
 
     public void subscribe(int index, String topic, int qos) throws MqttException {
-        mqttClientMap.get(index).subscribe(topic,qos);
+        mqttClientList.get(index).subscribe(topic,qos);
     }
     public void setMqttClient(MqttClient mqttClient) {
         mqttClientMap.put(mqttClient.getClientId(),mqttClient);

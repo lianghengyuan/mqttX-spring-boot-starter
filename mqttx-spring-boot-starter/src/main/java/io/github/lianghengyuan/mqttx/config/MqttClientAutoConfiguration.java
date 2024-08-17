@@ -63,12 +63,7 @@ class MqttClientAutoConfiguration {
             MqttClient mqttClient = new MqttClient(mqttConnectOptionsProperties.getServeruris().get(0),mqttConnectOptionsProperties.getClientid(),mqttClientPersistence());
             mqttClient.setManualAcks(mqttConnectOptionsProperties.isManualacks());
             mqttClient.setCallback(mqttProducerCallback);
-            try {
-                mqttClient.connect(mqttConnectOptions);
-            }catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            mqttClient.connect(mqttConnectOptions);
             for (String topic : mqttConnectOptionsProperties.getTopics()) {
                 mqttClient.subscribe(topic,dispatchMqttMessageListener);
             }

@@ -46,12 +46,28 @@ public class MqttProducer {
         }
     }
 
+    public void send(int index, String topic, String payload, int qos, boolean retained) {
+        try {
+            mqttClientList.get(index).publish(topic, payload.getBytes(StandardCharsets.UTF_8), qos, retained);
+        } catch (MqttException e) {
+            log.error("主题{}消息:{},发送失败，失败原因",topic, payload, e);
+        }
+    }
+
+    public void send(int index, String topic, String payload, int qos) {
+        send(index, topic, payload, qos, false);
+    }
+
     public void send(String clientId,String topic, String payload, int qos) {
         send(clientId, topic, payload, qos, false);
     }
 
     public void send(String clientId, String topic, String payload) {
         send(clientId, topic, payload,0);
+    }
+
+    public void send(int index, String topic, String payload) {
+        send(index, topic, payload,0);
     }
 
 
@@ -61,12 +77,26 @@ public class MqttProducer {
         send(clientId,topic,valueAsString, qos, retained);
     }
 
+    public<T extends Object> void sendByJson(int index, String topic, T msg, int qos, boolean retained) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String valueAsString = objectMapper.writeValueAsString(msg);
+        send(index, topic, valueAsString, qos, retained);
+    }
+
     public<T extends Object> void sendByJson(String clientId, String topic, T msg, int qos) throws JsonProcessingException {
         sendByJson(clientId,topic, msg, qos, false);
     }
 
+    public<T extends Object> void sendByJson(int index, String topic, T msg, int qos) throws JsonProcessingException {
+        sendByJson(index, topic, msg, qos, false);
+    }
+
     public<T extends Object> void sendByJson(String clientId, String topic, T msg) throws JsonProcessingException {
         sendByJson(clientId, topic, msg, 0, false);
+    }
+
+    public<T extends Object> void sendByJson(int index, String topic, T msg) throws JsonProcessingException {
+        sendByJson(index, topic, msg, 0, false);
     }
 
     public<T extends Object> void sendAllByJson(String topic, T msg, int qos, boolean retained) throws JsonProcessingException {

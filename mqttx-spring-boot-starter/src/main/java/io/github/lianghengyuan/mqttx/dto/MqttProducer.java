@@ -141,7 +141,7 @@ public class MqttProducer {
     public void subscribe(int index, String topic, int qos) throws MqttException {
         mqttClientList.get(index).subscribe(topic,qos);
     }
-    public void setMqttClient(MqttClient mqttClient) {
+    public void addMqttClient(MqttClient mqttClient) {
         mqttClientMap.put(mqttClient.getClientId(),mqttClient);
         mqttClientList.add(mqttClient);
     }

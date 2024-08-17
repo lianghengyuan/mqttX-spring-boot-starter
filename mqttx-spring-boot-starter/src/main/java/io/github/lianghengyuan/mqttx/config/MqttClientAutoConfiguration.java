@@ -51,7 +51,7 @@ class MqttClientAutoConfiguration {
 
         MqttProducer mqttProducer = new MqttProducer();
 
-        mqttConnectOptionsPropertiesList.forEach(mqttConnectOptionsProperties -> mqttProducer.setMqttClient(mqttClient(mqttConnectOptionsProperties)));
+        mqttConnectOptionsPropertiesList.forEach(mqttConnectOptionsProperties -> mqttProducer.addMqttClient(mqttClient(mqttConnectOptionsProperties)));
 
         return mqttProducer;
     }
@@ -63,7 +63,12 @@ class MqttClientAutoConfiguration {
             MqttClient mqttClient = new MqttClient(mqttConnectOptionsProperties.getServeruris().get(0),mqttConnectOptionsProperties.getClientid(),mqttClientPersistence());
             mqttClient.setManualAcks(mqttConnectOptionsProperties.isManualacks());
             mqttClient.setCallback(mqttProducerCallback);
-            mqttClient.connect(mqttConnectOptions);
+            try {
+                mqttClient.connect(mqttConnectOptions);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+
             for (String topic : mqttConnectOptionsProperties.getTopics()) {
                 mqttClient.subscribe(topic,dispatchMqttMessageListener);
             }

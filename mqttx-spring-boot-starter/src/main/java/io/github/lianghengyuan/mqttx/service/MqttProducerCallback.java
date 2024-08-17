@@ -7,10 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-
-/**
- * FiXME 此类并未起作用
- */
 @Component
 public class MqttProducerCallback implements MqttCallbackExtended {
     private static final Logger log = LoggerFactory.getLogger(MqttProducerCallback.class);
@@ -32,10 +28,8 @@ public class MqttProducerCallback implements MqttCallbackExtended {
     }
 
     @Override
-    public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-        System.out.println(String.format("收到主题为{}的消息：{}",topic, mqttMessage.getPayload().toString()));
-        log.info("收到主题为{}的消息：{}",topic, mqttMessage.getPayload().toString());
-        log.debug("收到主题为{}的消息：{}",topic, mqttMessage.getPayload().toString());
+    public void messageArrived(String topic, MqttMessage mqttMessage) {
+        log.debug("收到主题为{}的消息：{}",topic, new String(mqttMessage.getPayload()));
 
     }
 

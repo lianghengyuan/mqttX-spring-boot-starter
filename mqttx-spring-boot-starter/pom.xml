@@ -4,7 +4,7 @@
 
     <groupId>io.github.lianghengyuan</groupId>
     <artifactId>mqttx-spring-boot-starter</artifactId>
-    <version>1.2.09</version>
+    <version>1.2.10</version>
     <packaging>jar</packaging>
 
     <name>mqttx-spring-boot-starter</name>

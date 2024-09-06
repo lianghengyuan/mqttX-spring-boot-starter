@@ -51,7 +51,14 @@ class MqttClientAutoConfiguration {
 
         MqttProducer mqttProducer = new MqttProducer();
 
-        mqttConnectOptionsPropertiesList.forEach(mqttConnectOptionsProperties -> mqttProducer.addMqttClient(mqttClient(mqttConnectOptionsProperties)));
+        mqttConnectOptionsPropertiesList.forEach(mqttConnectOptionsProperties -> {
+            MqttClient mqttClient = mqttClient(mqttConnectOptionsProperties);
+            if (mqttClient != null) {
+                mqttProducer.addMqttClient(mqttClient);
+            } else {
+                log.error("{}连接失败",mqttConnectOptionsProperties.getClientid());
+            }
+        });
 
         return mqttProducer;
     }

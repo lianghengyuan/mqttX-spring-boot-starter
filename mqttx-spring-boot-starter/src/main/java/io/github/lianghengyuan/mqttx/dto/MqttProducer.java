@@ -15,9 +15,9 @@ public class MqttProducer {
 
     private static final Logger log = LoggerFactory.getLogger(MqttProducer.class);
 
-    private static Map<String, MqttClient> mqttClientMap = new HashMap<>(64);
+    private static final Map<String, MqttClient> mqttClientMap = new HashMap<>(64);
 
-    private static List<MqttClient> mqttClientList = new ArrayList<>();
+    private static final List<MqttClient> mqttClientList = new ArrayList<>();
 
 
     public void sendAll(String topic,String payload, int qos, boolean retained) {
